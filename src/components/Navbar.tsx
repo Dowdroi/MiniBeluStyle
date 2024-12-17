@@ -1,5 +1,7 @@
 import { observer } from "mobx-react-lite";
 import themeStore from "../store/themeStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = observer(() => {
   return (
@@ -55,11 +57,22 @@ const Navbar = observer(() => {
 
         {/* Dark Mode Toggle */}
         <button
-          onClick={() => themeStore.toggleDarkMode()} // Sử dụng MobX Store
-          className="rounded-lg border border-gray-300 px-4 py-2 text-blue-600 shadow-md 
-                     hover:bg-gray-200 dark:border-gray-700 dark:text-blue-400 dark:hover:bg-gray-700"
+          onClick={() => themeStore.toggleDarkMode()}
+          className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
         >
-          {themeStore.darkMode ? "Light Mode" : "Dark Mode"}
+          {themeStore.darkMode ? (
+            <FontAwesomeIcon
+              icon={faSun}
+              className="text-yellow-400"
+              size="lg"
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon={faMoon}
+              className="text-blue-500"
+              size="lg"
+            />
+          )}
         </button>
       </div>
     </nav>
