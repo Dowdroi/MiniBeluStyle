@@ -8,9 +8,11 @@ import {
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import { useAuthenticator, Button } from "@aws-amplify/ui-react";
 
 const Navbar = observer(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
 
   return (
     <nav className="sticky top-0 z-10 w-full bg-white shadow-md dark:bg-gray-800">
@@ -63,7 +65,7 @@ const Navbar = observer(() => {
           </li>
         </ul>
 
-        {/* Dark Mode Toggle */}
+        {/* Dark Mode & Auth Controls */}
         <div className="flex items-center space-x-4">
           <button
             onClick={() => themeStore.toggleDarkMode()}
@@ -83,6 +85,16 @@ const Navbar = observer(() => {
               />
             )}
           </button>
+
+          {/* Hiển thị nút Sign Out nếu user đăng nhập */}
+          {user && (
+            <Button
+              onClick={signOut}
+              className="rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
+            >
+              Sign Out
+            </Button>
+          )}
 
           {/* Hamburger Menu Toggle */}
           <button

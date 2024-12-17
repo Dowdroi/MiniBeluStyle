@@ -11,6 +11,12 @@ import Team from "./components/Team";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import themeStore from "./store/themeStore";
+import { Amplify } from "aws-amplify";
+import outputs from "../amplify_outputs.json";
+import "@aws-amplify/ui-react/styles.css";
+
+// AWS Amplify Config
+Amplify.configure(outputs);
 
 function App() {
   // Sync trạng thái dark mode từ MobX store vào DOM
