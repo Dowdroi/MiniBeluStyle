@@ -1,6 +1,7 @@
-# React + TypeScript + Vite
+# MiniBeluStyle
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+The MiniBeluStyle project is inspired by the original BeluStyle project. This is a web application deployed with AWS Amplify Gen 2, using React, TypeScript, and Vite technologies to create a smooth and efficient user experience.
 
 Currently, two official plugins are available:
 
