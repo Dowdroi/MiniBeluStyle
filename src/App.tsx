@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import "./index.css";
 import Navbar from "./components/Navbar";
@@ -10,31 +10,22 @@ import FAQ from "./components/FAQ";
 import Team from "./components/Team";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
+import themeStore from "./store/themeStore";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true"
-  );
-
+  // Sync trạng thái dark mode từ MobX store vào DOM
   useEffect(() => {
-    if (darkMode) {
+    if (themeStore.darkMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [darkMode]);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => {
-      localStorage.setItem("darkMode", String(!prevMode));
-      return !prevMode;
-    });
-  };
+  }, [themeStore.darkMode]);
 
   return (
     <div>
       {/* Navbar */}
-      <Navbar toggleDarkMode={toggleDarkMode} darkMode={darkMode} />
+      <Navbar />
 
       {/* Main Content */}
       <Hero />

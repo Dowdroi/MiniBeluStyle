@@ -1,4 +1,7 @@
-function Navbar({ toggleDarkMode, darkMode }: any) {
+import { observer } from "mobx-react-lite";
+import themeStore from "../store/themeStore";
+
+const Navbar = observer(() => {
   return (
     <nav className="sticky top-0 z-10 w-full bg-white shadow-md dark:bg-gray-800">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
@@ -50,17 +53,17 @@ function Navbar({ toggleDarkMode, darkMode }: any) {
           </li>
         </ul>
 
-        {/*Dark Mode */}
+        {/* Dark Mode Toggle */}
         <button
-          onClick={toggleDarkMode}
+          onClick={() => themeStore.toggleDarkMode()} // Sử dụng MobX Store
           className="rounded-lg border border-gray-300 px-4 py-2 text-blue-600 shadow-md 
                      hover:bg-gray-200 dark:border-gray-700 dark:text-blue-400 dark:hover:bg-gray-700"
         >
-          {darkMode ? "Light Mode" : "Dark Mode"}
+          {themeStore.darkMode ? "Light Mode" : "Dark Mode"}
         </button>
       </div>
     </nav>
   );
-}
+});
 
 export default Navbar;
