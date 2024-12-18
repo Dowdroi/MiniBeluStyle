@@ -32,7 +32,7 @@ const HeroSection = () => {
           <div className="typewriter">
             <h1
               ref={typewriterRef}
-              className="text-3xl sm:text-5xl font-bold leading-snug text-gray-800 dark:text-white"
+              className="text-3xl sm:text-5xl font-bold leading-[1.3] text-gray-800 dark:text-white pb-2"
             >
               Welcome to{" "}
               <span className="text-blue-600 dark:text-blue-400">
