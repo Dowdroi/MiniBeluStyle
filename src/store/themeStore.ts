@@ -4,14 +4,13 @@ class ThemeStore {
   darkMode = localStorage.getItem("darkMode") === "true" || false;
 
   constructor() {
-    makeAutoObservable(this); // Tự động theo dõi thay đổi của state
+    makeAutoObservable(this); // check state
   }
 
   toggleDarkMode() {
-    this.darkMode = !this.darkMode; // Đảo trạng thái darkMode
+    this.darkMode = !this.darkMode; // darkMode
     localStorage.setItem("darkMode", String(this.darkMode));
 
-    // Thêm lớp dark vào thẻ <html> để Tailwind hoạt động
     if (this.darkMode) {
       document.documentElement.classList.add("dark");
     } else {
