@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import menuStore from "../store/menuStore"; // Import menuStore
+import menuStore from "../store/menuStore";
 import themeStore from "../store/themeStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,8 +15,8 @@ const Navbar = observer(() => {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
 
   const handleSignOut = () => {
-    menuStore.resetMenus(); // Đóng tất cả menu
-    signOut(); // Đăng xuất người dùng
+    menuStore.resetMenus();
+    signOut();
   };
 
   return (
