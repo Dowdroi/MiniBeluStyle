@@ -7,11 +7,13 @@ import {
   faMoon,
   faBars,
   faTimes,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { useAuthenticator, Button } from "@aws-amplify/ui-react";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar = observer(() => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { user, signOut } = useAuthenticator((context) => [context.user]);
 
   return (
@@ -29,7 +31,7 @@ const Navbar = observer(() => {
           </h1>
         </div>
 
-        {/* Navigation Links - Ẩn trên mobile */}
+        {/* Navigation Links */}
         <ul className="hidden md:flex justify-center space-x-6 flex-grow">
           <li>
             <a
@@ -65,8 +67,9 @@ const Navbar = observer(() => {
           </li>
         </ul>
 
-        {/* Dark Mode & Auth Controls */}
-        <div className="flex items-center space-x-4">
+        {/* Dark Mode, Auth Controls & User Menu */}
+        <div className="flex items-center space-x-4 relative">
+          {/* Toggle Dark Mode */}
           <button
             onClick={() => themeStore.toggleDarkMode()}
             className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
@@ -86,14 +89,34 @@ const Navbar = observer(() => {
             )}
           </button>
 
-          {/* Nút Sign Out hiển thị trên desktop */}
+          {/* User Menu */}
           {user && (
-            <Button
-              onClick={signOut}
-              className="hidden md:block rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
-            >
-              Sign Out
-            </Button>
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="text-gray-600 dark:text-gray-200"
+                  size="lg"
+                />
+              </button>
+              {isUserMenuOpen && (
+                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg py-2">
+                  <div className="px-4 py-2 text-sm text-gray-800 dark:text-gray-200">
+                    Thanks for being here!
+                  </div>
+                  <hr className="border-gray-300 dark:border-gray-700" />
+                  <button
+                    onClick={signOut}
+                    className="block w-full text-left px-4 py-2 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 rounded transition"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </div>
           )}
 
           {/* Hamburger Menu Toggle */}
@@ -133,16 +156,6 @@ const Navbar = observer(() => {
           >
             Contact
           </a>
-
-          {/* Nút Sign Out hiển thị trong mobile menu */}
-          {user && (
-            <Button
-              onClick={signOut}
-              className="rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
-            >
-              Sign Out
-            </Button>
-          )}
         </div>
       )}
     </nav>
