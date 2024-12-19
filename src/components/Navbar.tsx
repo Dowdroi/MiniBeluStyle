@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { observer } from "mobx-react-lite";
+import menuStore from "../store/menuStore"; // Import menuStore
 import themeStore from "../store/themeStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,8 +12,6 @@ import {
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Navbar = observer(() => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const { user, signOut } = useAuthenticator((context) => [context.user]);
 
   return (
@@ -93,7 +91,7 @@ const Navbar = observer(() => {
           {user && (
             <div className="relative">
               <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                onClick={() => menuStore.toggleUserMenu()}
                 className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
               >
                 <FontAwesomeIcon
@@ -102,7 +100,7 @@ const Navbar = observer(() => {
                   size="lg"
                 />
               </button>
-              {isUserMenuOpen && (
+              {menuStore.isUserMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg py-2">
                   <div className="px-4 py-2 text-sm text-gray-800 dark:text-gray-200">
                     Thanks for being here!
@@ -121,16 +119,19 @@ const Navbar = observer(() => {
 
           {/* Hamburger Menu Toggle */}
           <button
-            className="block md:hidden text-gray-600 dark:text-gray-200"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className={`block md:hidden text-gray-600 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}
+            onClick={() => menuStore.toggleMenu()}
           >
-            <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} size="lg" />
+            <FontAwesomeIcon
+              icon={menuStore.isMenuOpen ? faTimes : faBars}
+              size="lg"
+            />
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
+      {menuStore.isMenuOpen && (
         <div className="md:hidden flex flex-col items-center space-y-4 bg-white dark:bg-gray-800 py-6">
           <a
             href="#"
