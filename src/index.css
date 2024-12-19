@@ -6,16 +6,13 @@
   font-family: "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color: #213547;
   background-color: #ffffff;
-
-  /* Áp dụng theme mặc định */
   color-scheme: light;
 }
 
 .dark {
-  /* Khi dark mode bật */
+ 
   color-scheme: dark;
   color: #e5e7eb;
   background-color: #1f2937;

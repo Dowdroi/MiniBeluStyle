@@ -86,11 +86,11 @@ const Navbar = observer(() => {
             )}
           </button>
 
-          {/* Hiển thị nút Sign Out nếu user đăng nhập */}
+          {/* Nút Sign Out hiển thị trên desktop */}
           {user && (
             <Button
               onClick={signOut}
-              className="rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
+              className="hidden md:block rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
             >
               Sign Out
             </Button>
@@ -133,6 +133,16 @@ const Navbar = observer(() => {
           >
             Contact
           </a>
+
+          {/* Nút Sign Out hiển thị trong mobile menu */}
+          {user && (
+            <Button
+              onClick={signOut}
+              className="rounded px-3 py-1 text-white bg-blue-600 hover:bg-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white dark:border dark:border-gray-600"
+            >
+              Sign Out
+            </Button>
+          )}
         </div>
       )}
     </nav>
