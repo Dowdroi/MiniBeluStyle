@@ -19,7 +19,7 @@ import "@aws-amplify/ui-react/styles.css";
 Amplify.configure(outputs);
 
 function App() {
-  // Sync trạng thái dark mode từ MobX store vào DOM
+  // Dark mode từ Mobx
   useEffect(() => {
     if (themeStore.darkMode) {
       document.documentElement.classList.add("dark");
@@ -30,9 +30,7 @@ function App() {
 
   return (
     <div>
-      {/* Navbar */}
       <Navbar />
-
       {/* Main Content */}
       <Hero />
       <Features />
