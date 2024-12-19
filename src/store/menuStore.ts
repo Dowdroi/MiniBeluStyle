@@ -21,6 +21,11 @@ class MenuStore {
       this.isMenuOpen = false; // Đóng Hamburger Menu
     }
   }
+
+  resetMenus() {
+    this.isMenuOpen = false;
+    this.isUserMenuOpen = false;
+  }
 }
 
 const menuStore = new MenuStore();

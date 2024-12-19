@@ -14,6 +14,11 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 const Navbar = observer(() => {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
 
+  const handleSignOut = () => {
+    menuStore.resetMenus(); // Đóng tất cả menu
+    signOut(); // Đăng xuất người dùng
+  };
+
   return (
     <nav className="sticky top-0 z-10 w-full bg-white shadow-md dark:bg-gray-800">
       <div className="container mx-auto flex items-center justify-between px-4 py-4">
@@ -107,7 +112,7 @@ const Navbar = observer(() => {
                   </div>
                   <hr className="border-gray-300 dark:border-gray-700" />
                   <button
-                    onClick={signOut}
+                    onClick={handleSignOut}
                     className="block w-full text-left px-4 py-2 text-sm bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 rounded transition"
                   >
                     Log Out
