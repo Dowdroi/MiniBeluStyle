@@ -11,14 +11,14 @@ class MenuStore {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
-      this.isUserMenuOpen = false; // Đóng User Menu
+      this.isUserMenuOpen = false; // User Menu
     }
   }
 
   toggleUserMenu() {
     this.isUserMenuOpen = !this.isUserMenuOpen;
     if (this.isUserMenuOpen) {
-      this.isMenuOpen = false; // Đóng Hamburger Menu
+      this.isMenuOpen = false; // Hamburger Menu
     }
   }
 

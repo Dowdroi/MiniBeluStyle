@@ -8,16 +8,48 @@ import {
   faBars,
   faTimes,
   faUser,
+  faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import cartStore from "../store/cartStore";
+import { useEffect, useRef } from "react";
 
 const Navbar = observer(() => {
   const { user, signOut } = useAuthenticator((context) => [context.user]);
+  const userMenuRef = useRef<HTMLDivElement | null>(null);
+  const hamburgerMenuRef = useRef<HTMLDivElement | null>(null);
 
   const handleSignOut = () => {
     menuStore.resetMenus();
     signOut();
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    // Close user menu if clicked outside
+    if (
+      menuStore.isUserMenuOpen &&
+      userMenuRef.current &&
+      !userMenuRef.current.contains(event.target as Node)
+    ) {
+      menuStore.toggleUserMenu();
+    }
+
+    // Close hamburger menu if clicked outside
+    if (
+      menuStore.isMenuOpen &&
+      hamburgerMenuRef.current &&
+      !hamburgerMenuRef.current.contains(event.target as Node)
+    ) {
+      menuStore.toggleMenu();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <nav className="sticky top-0 z-10 w-full bg-white shadow-md dark:bg-gray-800">
@@ -62,7 +94,9 @@ const Navbar = observer(() => {
           </li>
           <li>
             <a
-              href="#"
+              href="https://www.facebook.com/people/BeluStyle/61552976986503/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-gray-600 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition"
             >
               Contact
@@ -92,9 +126,26 @@ const Navbar = observer(() => {
             )}
           </button>
 
+          {/* Cart Button */}
+          <button
+            onClick={() => cartStore.toggleCart()}
+            className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <FontAwesomeIcon
+              icon={faShoppingCart}
+              className="text-gray-600 dark:text-gray-200"
+              size="lg"
+            />
+            {cartStore.totalItems > 0 && (
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartStore.totalItems > 99 ? "99+" : cartStore.totalItems}
+              </span>
+            )}
+          </button>
+
           {/* User Menu */}
           {user && (
-            <div className="relative">
+            <div className="relative" ref={userMenuRef}>
               <button
                 onClick={() => menuStore.toggleUserMenu()}
                 className="flex items-center justify-center rounded-full w-10 h-10 bg-gray-200 dark:bg-gray-700 shadow-md hover:shadow-lg transition-all duration-300"
@@ -123,15 +174,17 @@ const Navbar = observer(() => {
           )}
 
           {/* Hamburger Menu Toggle */}
-          <button
-            className={`block md:hidden text-gray-600 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}
-            onClick={() => menuStore.toggleMenu()}
-          >
-            <FontAwesomeIcon
-              icon={menuStore.isMenuOpen ? faTimes : faBars}
-              size="lg"
-            />
-          </button>
+          <div ref={hamburgerMenuRef}>
+            <button
+              className={`block md:hidden text-gray-600 dark:text-gray-200 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-300`}
+              onClick={() => menuStore.toggleMenu()}
+            >
+              <FontAwesomeIcon
+                icon={menuStore.isMenuOpen ? faTimes : faBars}
+                size="lg"
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -157,7 +210,9 @@ const Navbar = observer(() => {
             About
           </a>
           <a
-            href="#"
+            href="https://www.facebook.com/people/BeluStyle/61552976986503/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-600 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-400 transition"
           >
             Contact

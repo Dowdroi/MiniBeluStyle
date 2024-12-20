@@ -4,7 +4,7 @@ const HeroSection = () => {
   const typewriterRef = useRef<HTMLHeadingElement | null>(null);
 
   useEffect(() => {
-    const typingDuration = 4000; // Animation thời gian chạy (4s)
+    const typingDuration = 4000; // Animation (4s)
 
     const timer = setTimeout(() => {
       if (typewriterRef.current) {
@@ -46,7 +46,15 @@ const HeroSection = () => {
           </p>
           <div className="flex flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0 justify-center md:justify-start">
             <a
-              href="#"
+              onClick={() => {
+                const productSection = document.getElementById("product-list");
+                if (productSection) {
+                  productSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }
+              }}
               className="transform rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-6 py-3 text-sm sm:text-base text-white shadow-lg transition hover:scale-105 hover:opacity-90 hover:bg-blue-600 dark:from-blue-400 dark:to-blue-600 dark:hover:bg-blue-500 dark:hover:text-yellow-300"
             >
               Shop Now

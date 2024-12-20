@@ -14,6 +14,8 @@ import themeStore from "./store/themeStore";
 import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
+import ProductList from "./components/ProductList";
+import Cart from "./components/Cart";
 
 // AWS Amplify Config
 Amplify.configure(outputs);
@@ -31,9 +33,11 @@ function App() {
   return (
     <div>
       <Navbar />
+      <Cart />
       {/* Main Content */}
       <Hero />
       <Features />
+      <ProductList />
       <Feedback />
       <Stats />
       <FAQ />
