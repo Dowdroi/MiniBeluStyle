@@ -33,17 +33,20 @@ const Cart = observer(() => {
           Shopping Cart
         </h2>
         {/* Cart Items */}
-        {cartStore.cart.length === 0 ? (
-          <p className="text-gray-600 dark:text-gray-300">
-            Your cart is empty.
-          </p>
-        ) : (
-          <div>
-            {cartStore.cart.map((product) => (
-              <CartItem key={product.id} product={product} />
-            ))}
-          </div>
-        )}
+        {/* Cart Items */}
+        <div className="overflow-y-auto max-h-96">
+          {cartStore.cart.length === 0 ? (
+            <p className="text-gray-600 dark:text-gray-300">
+              Your cart is empty.
+            </p>
+          ) : (
+            <div>
+              {cartStore.cart.map((product) => (
+                <CartItem key={product.id} product={product} />
+              ))}
+            </div>
+          )}
+        </div>
         {/* Cart Footer */}
         <div className="border-t border-gray-300 dark:border-gray-700 pt-4 mt-4">
           <h3 className="text-lg font-bold text-gray-800 dark:text-white">
