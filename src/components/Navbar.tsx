@@ -59,7 +59,7 @@ const Navbar = observer(() => {
           <img
             src="https://i.imgur.com/MbT6Fhn.png"
             alt="BeluStyle Logo"
-            className="h-10 w-10"
+            className="h-10 w-10 transform transition-transform duration-500 hover:scale-110 hover:rotate-12"
           />
           <h1 className="text-xl font-bold text-gray-800 dark:text-white">
             BeluStyle

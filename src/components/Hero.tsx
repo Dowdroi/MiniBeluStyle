@@ -23,7 +23,7 @@ const HeroSection = () => {
           <img
             src="https://i.imgur.com/045SBNN.png"
             alt="BeluStyle Logo"
-            className="w-28 sm:w-40 md:w-60 lg:w-80"
+            className="w-28 sm:w-40 md:w-60 lg:w-80 transform transition-transform duration-500 hover:scale-110 hover:rotate-12"
           />
         </div>
 
